@@ -116,6 +116,7 @@ public class PaisDAO
 			PreparedStatement statement = connection.prepareStatement(sqlDelete);)
 		{
 			statement.setInt(1, pais.getID());
+			statement.execute();
 		} 
 		catch (ClassNotFoundException error) 
 		{
