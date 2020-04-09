@@ -30,6 +30,8 @@ public class PaisController extends HttpServlet
 		String area = request.getParameter("area");
 		String acao = request.getParameter("acao");
 		
+		System.out.println(area);
+		
 		if("".equals(nome))
 			nome = " ";
 		if("".equals(populacao))
@@ -41,17 +43,18 @@ public class PaisController extends HttpServlet
 		pais.setNome(nome);
 		pais.setPopulacao(Long.parseLong(populacao));
 		pais.setArea(Double.parseDouble(area));
-			
+		
 		PaisService paisService = new PaisService();
 		RequestDispatcher dispatcher = null;
 		
 		switch(acao)
 		{
-			case "Incluir":
+			case "Salvar":
 				paisService.create(pais);
 				pais = paisService.read(pais.getID());
 				request.setAttribute("pais", pais);
 				dispatcher = request.getRequestDispatcher("Pais.jsp");
+				System.out.println(pais.getArea());
 				break;
 				
 			case "Listar":
@@ -68,14 +71,6 @@ public class PaisController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
-			
-				/*PrintWriter writer = response.getWriter();
-				writer.println("<html><head><title> Cadastro de Pais </title></head><body><h3>Pais Cadastrado</h3>");
-				writer.println("ID: "+pais.getID()+"<br>");
-				writer.println("Nome: "+pais.getNome()+"<br>");
-				writer.println("População: "+pais.getPopulacao()+"<br>");
-				writer.println("Area: "+pais.getArea()+"<br>");
-				writer.println("</body></html>");*/
 	}
 }
 
