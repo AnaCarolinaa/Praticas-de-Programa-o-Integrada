@@ -30,8 +30,6 @@ public class PaisController extends HttpServlet
 		String area = request.getParameter("area");
 		String acao = request.getParameter("acao");
 		
-		System.out.println("Area coletada: "+area);
-		
 		if("".equals(nome))
 			nome = " ";
 		if("".equals(populacao))

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import dao.PaisMetodos;
 import model.Pais;
 import service.PaisService;
 
@@ -103,5 +104,14 @@ public class PaisTeste
 		paisService.delete(ID);
 		pais = paisService.read(ID);
 		assertEquals("Delete test", pais, paisCopia);
+	}
+	
+	@Test public void testMenorPais()
+	{
+		System.out.println("Procurar pais com menor area");
+		PaisMetodos paisMetodos = new PaisMetodos();
+		String menorArea = paisMetodos.menorArea();
+		System.out.println(menorArea);
+		assertEquals("Teste de pesquisa", pais);
 	}
 }

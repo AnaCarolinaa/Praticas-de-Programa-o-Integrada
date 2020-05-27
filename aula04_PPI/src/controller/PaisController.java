@@ -34,7 +34,7 @@ public class PaisController extends HttpServlet
 			nome = " ";
 		if("".equals(populacao))
 				populacao = "0";
-		if("".equals(area));
+		if("".equals(area))
 			area = "0";
 		
 		Pais pais = new Pais();
