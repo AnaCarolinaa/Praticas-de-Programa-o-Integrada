@@ -35,22 +35,18 @@ public class PaisController extends HttpServlet
 		int id = -1;
 		long populacao = -1;
 		double area = -1;
-		try 
-		{
+		try {
 			id = Integer.parseInt(pId);
 			
 		} catch (NumberFormatException e) {
 
 		}
-		try
-		{
+		try {
 			populacao = Long.parseLong(pPopulacao);
 			area = Double.parseDouble(pArea);
 			
-		} 
-		catch (NumberFormatException e) 
-		{
-			System.out.println(e);
+		} catch (NumberFormatException e) {
+
 		}
 
 		Pais pais = new Pais();
@@ -59,29 +55,25 @@ public class PaisController extends HttpServlet
 		pais.setPopulacao(populacao);
 		pais.setArea(area);
 
+		// instanciar o service
 		PaisService cs = new PaisService();
 		RequestDispatcher view = null;
 		HttpSession session = request.getSession();
 
-		if (pAcao.equals("Criar")) 
-		{
+		if (pAcao.equals("Criar")) {
 			cs.create(pais);
 			ArrayList<Pais> lista = new ArrayList<>();
 			
 			lista.add(pais);
 			session.setAttribute("lista", lista);
 			view = request.getRequestDispatcher("ListaDePaises.jsp");
-		} 
-		else if (pAcao.equals("Excluir")) 
-		{
+		} else if (pAcao.equals("Excluir")) {
 			cs.delete(pais.getID());
 			ArrayList<Pais> lista = (ArrayList<Pais>)session.getAttribute("lista");
 			lista.remove(busca(pais, lista));
 			session.setAttribute("lista", lista);
 			view = request.getRequestDispatcher("index.jsp");
-		} 
-		else if (pAcao.equals("Alterar")) 
-		{
+		} else if (pAcao.equals("Alterar")) {
 			cs.update(pais);
 			ArrayList<Pais> lista = (ArrayList<Pais>) session.getAttribute("lista");
 			int pos = busca(pais, lista);
@@ -90,15 +82,11 @@ public class PaisController extends HttpServlet
 			session.setAttribute("lista", lista);
 			request.setAttribute("pais", pais);
 			view = request.getRequestDispatcher("VisualizarPais.jsp");
-		} 
-		else if (pAcao.equals("Visualizar")) 
-		{
+		} else if (pAcao.equals("Visualizar")) {
 			pais = cs.read(pais.getID());
 			request.setAttribute("pais", pais);
 			view = request.getRequestDispatcher("VisualizarPais.jsp");
-		} 
-		else if (pAcao.equals("Editar")) 
-		{
+		} else if (pAcao.equals("Editar")) {
 			pais = cs.read(pais.getID());
 			request.setAttribute("pais", pais);
 			view = request.getRequestDispatcher("AlterarPais.jsp");
